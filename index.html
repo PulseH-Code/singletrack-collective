@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Singletrack Collective | 1:1 Running Coaching</title>
+  <meta name="description" content="Personalised 1:1 running coaching for all runners. Whether you're starting out or chasing a big goal, get the support you need to become the runner you want to be.">
+  <meta property="og:title" content="Singletrack Collective | 1:1 Running Coaching">
+  <meta property="og:description" content="Personalised 1:1 running coaching for all runners. Every goal. Every stage.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-teal':       '#2D6A6A',
+            'brand-navy':       '#1E3A3A',
+            'brand-orange':     '#E07A3A',
+            'brand-cream':      '#F5F5F3',
+            'brand-lteal':      '#D6EAEA',
+            'brand-mgray':      '#6B7B7B',
+            'brand-dgray':      '#333333',
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    [x-cloak] { display: none !important; }
+    /* Thin scrollbar inside the sticky form panel */
+    .form-panel::-webkit-scrollbar { width: 4px; }
+    .form-panel::-webkit-scrollbar-track { background: transparent; }
+    .form-panel::-webkit-scrollbar-thumb { background: #2D6A6A; border-radius: 2px; }
+    /* Select arrow colour fix on dark bg */
+    select option { color: #1a1a1a; background: #fff; }
+  </style>
+</head>
+
+<body class="font-sans text-brand-dgray bg-white antialiased" x-data="{ mobileOpen: false }">
+
+<!-- ================================================================
+     NAVIGATION — sticky, transparent → white on scroll
+     ================================================================ -->
+<header
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+  x-data="{ scrolled: false }"
+  @scroll.window="scrolled = window.scrollY > 40"
+  :class="scrolled ? 'bg-white shadow-sm' : 'bg-transparent'"
+  style="height:64px"
+>
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 h-full flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="#" class="flex items-center gap-3 shrink-0 group">
+      <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="nav-logo-clip"><circle cx="21" cy="21" r="19"/></clipPath>
+        </defs>
+        <circle cx="21" cy="21" r="19" fill="#D6EAEA"/>
+        <!-- layered mountains -->
+        <path d="M2,28 L9,17 L15,23 L22,11 L29,20 L35,14 L40,20 L40,40 L2,40 Z"
+              fill="#2D6A6A" opacity="0.45" clip-path="url(#nav-logo-clip)"/>
+        <path d="M2,32 L10,22 L17,28 L24,18 L31,26 L38,20 L40,24 L40,40 L2,40 Z"
+              fill="#1E3A3A" opacity="0.75" clip-path="url(#nav-logo-clip)"/>
+        <!-- orange horizon band -->
+        <path d="M2,34 Q21,30 40,34 L40,40 L2,40 Z" fill="#E07A3A" opacity="0.55" clip-path="url(#nav-logo-clip)"/>
+        <!-- runner silhouettes -->
+        <g clip-path="url(#nav-logo-clip)" stroke="#fff" stroke-linecap="round" fill="none">
+          <!-- Runner 1 -->
+          <circle cx="14" cy="27" r="2.2" fill="#fff" stroke="none"/>
+          <line x1="14" y1="29.2" x2="13" y2="34" stroke-width="1.4"/>
+          <line x1="13" y1="34" x2="11" y2="37" stroke-width="1.4"/>
+          <line x1="13" y1="34" x2="15.5" y2="37" stroke-width="1.4"/>
+          <line x1="14" y1="30.5" x2="11.5" y2="32.5" stroke-width="1.4"/>
+          <line x1="14" y1="30.5" x2="16.5" y2="32" stroke-width="1.4"/>
+          <!-- Runner 2 -->
+          <circle cx="21" cy="26" r="2.2" fill="#fff" stroke="none"/>
+          <line x1="21" y1="28.2" x2="20" y2="33" stroke-width="1.4"/>
+          <line x1="20" y1="33" x2="18" y2="36.5" stroke-width="1.4"/>
+          <line x1="20" y1="33" x2="22.5" y2="36.5" stroke-width="1.4"/>
+          <line x1="21" y1="29.5" x2="18.5" y2="31.5" stroke-width="1.4"/>
+          <line x1="21" y1="29.5" x2="23.5" y2="31" stroke-width="1.4"/>
+          <!-- Runner 3 -->
+          <circle cx="28" cy="27" r="2.2" fill="#fff" stroke="none"/>
+          <line x1="28" y1="29.2" x2="27" y2="34" stroke-width="1.4"/>
+          <line x1="27" y1="34" x2="25" y2="37" stroke-width="1.4"/>
+          <line x1="27" y1="34" x2="29.5" y2="37" stroke-width="1.4"/>
+          <line x1="28" y1="30.5" x2="25.5" y2="32.5" stroke-width="1.4"/>
+          <line x1="28" y1="30.5" x2="30.5" y2="32" stroke-width="1.4"/>
+        </g>
+        <circle cx="21" cy="21" r="19" fill="none" stroke="#2D6A6A" stroke-width="2"/>
+      </svg>
+      <div>
+        <div class="text-[10px] font-bold tracking-[0.2em] text-brand-teal leading-tight">SINGLETRACK</div>
+        <div class="text-[10px] font-bold tracking-[0.2em] text-brand-teal leading-tight">COLLECTIVE</div>
+      </div>
+    </a>
+
+    <!-- Desktop nav links -->
+    <nav class="hidden lg:flex items-center gap-7">
+      <a href="#about"        class="text-[13px] font-medium text-brand-dgray hover:text-brand-teal transition-colors">About</a>
+      <a href="#coaching"     class="text-[13px] font-medium text-brand-dgray hover:text-brand-teal transition-colors">Coaching</a>
+      <a href="#testimonials" class="text-[13px] font-medium text-brand-dgray hover:text-brand-teal transition-colors">Testimonials</a>
+      <a href="#process"      class="text-[13px] font-medium text-brand-dgray hover:text-brand-teal transition-colors">Process</a>
+      <a href="#enquiry"
+         class="bg-brand-teal text-white text-[15px] font-semibold tracking-[0.02em] px-7 py-[11px] rounded-[6px] hover:bg-brand-navy transition-colors">
+        Enquire
+      </a>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button class="lg:hidden p-2 text-brand-dgray" @click="mobileOpen = true" aria-label="Open menu">
+      <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile nav overlay -->
+<div
+  class="fixed inset-0 bg-brand-navy z-[60] flex flex-col items-center justify-center lg:hidden"
+  x-show="mobileOpen" x-cloak
+  x-transition:enter="transition duration-200"
+  x-transition:enter-start="opacity-0 scale-95"
+  x-transition:enter-end="opacity-100 scale-100"
+  x-transition:leave="transition duration-150"
+  x-transition:leave-start="opacity-100 scale-100"
+  x-transition:leave-end="opacity-0 scale-95"
+>
+  <button class="absolute top-4 right-5 text-white p-2" @click="mobileOpen = false" aria-label="Close menu">
+    <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+  <nav class="flex flex-col items-center gap-9">
+    <a href="#about"        class="text-2xl font-semibold text-white" @click="mobileOpen = false">About</a>
+    <a href="#coaching"     class="text-2xl font-semibold text-white" @click="mobileOpen = false">Coaching</a>
+    <a href="#testimonials" class="text-2xl font-semibold text-white" @click="mobileOpen = false">Testimonials</a>
+    <a href="#process"      class="text-2xl font-semibold text-white" @click="mobileOpen = false">Process</a>
+    <a href="#enquiry"
+       class="mt-2 bg-brand-teal text-white text-lg font-semibold px-10 py-4 rounded-[6px] hover:bg-teal-600 transition-colors"
+       @click="mobileOpen = false">Enquire</a>
+  </nav>
+</div>
+
+
+<!-- ================================================================
+     PAGE BODY — two-column on desktop: sections left, sticky form right
+     ================================================================ -->
+<div class="pt-16">
+  <div class="max-w-[1200px] mx-auto lg:flex lg:items-start">
+
+    <!-- ============================================================
+         LEFT / MAIN — all content sections
+         ============================================================ -->
+    <main class="flex-1 min-w-0">
+
+      <!-- ── HERO ── -->
+      <section class="bg-brand-cream relative overflow-hidden">
+        <div class="px-6 lg:px-12 pt-20 lg:pt-[120px] pb-10 lg:pb-20">
+          <div class="lg:grid lg:grid-cols-[55%_45%] lg:gap-8 items-center">
+
+            <!-- Text -->
+            <div>
+              <p class="text-xs font-semibold tracking-[0.22em] text-brand-teal uppercase mb-5">
+                1:1 Running Coaching
+              </p>
+              <h1 class="text-[44px] sm:text-[52px] lg:text-[56px] font-bold text-brand-navy leading-[1.08] mb-5">
+                Singletrack<br>Collective
+              </h1>
+              <p class="text-xl lg:text-2xl font-medium text-brand-dgray mb-5 leading-snug">
+                Coaching for all runners.<br>Every goal. Every stage.
+              </p>
+              <p class="text-base text-brand-mgray leading-relaxed mb-9 max-w-[460px]">
+                Supportive, personalised coaching that meets you where you are and helps you become the runner
+                you want to be. Whether you are starting out or chasing something big, you don't have to do it alone.
+              </p>
+              <a href="#enquiry"
+                 class="inline-flex items-center gap-2 bg-brand-teal text-white text-[15px] font-semibold tracking-[0.02em] px-7 py-3.5 rounded-[6px] hover:bg-brand-navy transition-colors">
+                Enquire About Coaching
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+
+            <!-- Hero illustration — circular landscape with runners -->
+            <div class="hidden lg:flex justify-center items-center pt-4">
+              <svg width="340" height="340" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three runners against a layered mountain landscape">
+                <defs>
+                  <clipPath id="hero-clip"><circle cx="170" cy="170" r="155"/></clipPath>
+                </defs>
+                <!-- Sky -->
+                <circle cx="170" cy="170" r="155" fill="#C8DFE0"/>
+                <!-- Far mountains — teal -->
+                <path d="M15,200 L55,125 L90,155 L125,90 L165,135 L200,70 L240,120 L280,95 L325,145 L325,325 L15,325 Z"
+                      fill="#2D6A6A" opacity="0.40" clip-path="url(#hero-clip)"/>
+                <!-- Near mountains — navy -->
+                <path d="M15,235 L50,165 L85,195 L120,145 L160,180 L198,130 L238,170 L275,148 L325,185 L325,325 L15,325 Z"
+                      fill="#1E3A3A" opacity="0.55" clip-path="url(#hero-clip)"/>
+                <!-- Orange horizon -->
+                <path d="M15,278 Q90,262 170,272 Q248,282 325,265 L325,298 Q248,315 170,305 Q90,295 15,312 Z"
+                      fill="#E07A3A" opacity="0.65" clip-path="url(#hero-clip)"/>
+                <!-- Ground / sand -->
+                <path d="M15,300 Q90,292 170,298 Q248,304 325,295 L325,325 L15,325 Z"
+                      fill="#C8976A" clip-path="url(#hero-clip)"/>
+
+                <!-- Runner 1 (left, slightly receded) -->
+                <g clip-path="url(#hero-clip)" transform="translate(104,250)" opacity="0.82">
+                  <circle cx="0" cy="-21" r="6.5" fill="#1E3A3A"/>
+                  <path d="M0,-14.5 L-2,1" stroke="#1E3A3A" stroke-width="3.2" stroke-linecap="round"/>
+                  <path d="M-1,-9 L-9.5,-2.5" stroke="#1E3A3A" stroke-width="2.8" stroke-linecap="round"/>
+                  <path d="M-1,-9 L7.5,-3" stroke="#1E3A3A" stroke-width="2.8" stroke-linecap="round"/>
+                  <path d="M-2,1 L-9.5,13" stroke="#1E3A3A" stroke-width="3.2" stroke-linecap="round"/>
+                  <path d="M-2,1 L5.5,13" stroke="#1E3A3A" stroke-width="3.2" stroke-linecap="round"/>
+                </g>
+
+                <!-- Runner 2 (center, prominent) -->
+                <g clip-path="url(#hero-clip)" transform="translate(170,244)">
+                  <circle cx="0" cy="-23" r="7.5" fill="#1E3A3A"/>
+                  <path d="M0,-15.5 L-2,2" stroke="#1E3A3A" stroke-width="3.8" stroke-linecap="round"/>
+                  <path d="M-1,-10 L-11,-3" stroke="#1E3A3A" stroke-width="3.2" stroke-linecap="round"/>
+                  <path d="M-1,-10 L9,-4" stroke="#1E3A3A" stroke-width="3.2" stroke-linecap="round"/>
+                  <path d="M-2,2 L-10.5,15" stroke="#1E3A3A" stroke-width="3.8" stroke-linecap="round"/>
+                  <path d="M-2,2 L6.5,15" stroke="#1E3A3A" stroke-width="3.8" stroke-linecap="round"/>
+                </g>
+
+                <!-- Runner 3 (right, slightly receded) -->
+                <g clip-path="url(#hero-clip)" transform="translate(238,252)" opacity="0.82">
+                  <circle cx="0" cy="-21" r="6.5" fill="#1E3A3A"/>
+                  <path d="M0,-14.5 L-2,1" stroke="#1E3A3A" stroke-width="3.2" stroke-linecap="round"/>
+                  <path d="M-1,-9 L-9,-3" stroke="#1E3A3A" stroke-width="2.8" stroke-linecap="round"/>
+                  <path d="M-1,-9 L8,-2.5" stroke="#1E3A3A" stroke-width="2.8" stroke-linecap="round"/>
+                  <path d="M-2,1 L-9,13" stroke="#1E3A3A" stroke-width="3.2" stroke-linecap="round"/>
+                  <path d="M-2,1 L6,13" stroke="#1E3A3A" stroke-width="3.2" stroke-linecap="round"/>
+                </g>
+
+                <!-- Circle border + accent dots -->
+                <circle cx="170" cy="170" r="155" fill="none" stroke="#2D6A6A" stroke-width="5"/>
+                <circle cx="170" cy="15" r="4" fill="#E07A3A"/>
+                <circle cx="298" cy="60" r="3" fill="#E07A3A" opacity="0.6"/>
+                <circle cx="42"  cy="60" r="3" fill="#E07A3A" opacity="0.6"/>
+              </svg>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Wave divider — cream → white -->
+        <div class="relative -mb-px">
+          <svg viewBox="0 0 1200 56" preserveAspectRatio="none" class="w-full block" height="56">
+            <path d="M0,28 C200,56 400,0 600,28 C800,56 1000,0 1200,28 L1200,56 L0,56 Z" fill="#ffffff"/>
+          </svg>
+        </div>
+      </section>
+
+
+      <!-- ── ABOUT / PHILOSOPHY ── -->
+      <section id="about" class="bg-white px-6 lg:px-12 py-16 lg:py-20">
+        <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-start">
+
+          <!-- Left: heading + body copy -->
+          <div>
+            <h2 class="text-[30px] lg:text-[34px] font-bold text-brand-navy leading-tight mb-6">
+              Running is for everyone.<br>So is my coaching.
+            </h2>
+            <p class="text-[15px] text-brand-mgray leading-relaxed mb-4">
+              Coaching should feel supportive, not stressful. My approach is built entirely around you — your schedule,
+              your experience, and what running means to you. Whether you're lacing up for the very first time or
+              deep into ultra-distance training, you deserve a coach who listens and adapts.
+            </p>
+            <p class="text-[15px] text-brand-mgray leading-relaxed">
+              I believe in building consistency, growing confidence, and helping every runner develop a lasting love
+              of the sport. Progress looks different for everyone — and that's exactly the point.
+            </p>
+          </div>
+
+          <!-- Right: 3 feature items -->
+          <div class="mt-10 lg:mt-0 flex flex-col gap-8">
+
+            <!-- Feature: All runners welcome -->
+            <div class="flex gap-4 items-start">
+              <div class="shrink-0 w-12 h-12 rounded-full bg-brand-lteal flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2D6A6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="5" r="2.2"/>
+                  <path d="M12 7.2 L10.5 13"/>
+                  <path d="M12 7.2 L13.5 13"/>
+                  <path d="M10.5 13 L8 18"/>
+                  <path d="M13.5 13 L16 18"/>
+                  <path d="M10.5 10 L8 12"/>
+                  <path d="M13.5 10 L16 12"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-[17px] font-semibold text-brand-navy mb-1">All runners welcome</h3>
+                <p class="text-sm text-brand-mgray leading-relaxed">From beginners to experienced runners, road to trail, short distances to ultras.</p>
+              </div>
+            </div>
+
+            <!-- Feature: Personalised coaching -->
+            <div class="flex gap-4 items-start">
+              <div class="shrink-0 w-12 h-12 rounded-full bg-brand-lteal flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2D6A6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 20 L9 8 L13.5 14 L17 6 L21 20 Z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-[17px] font-semibold text-brand-navy mb-1">Personalised coaching</h3>
+                <p class="text-sm text-brand-mgray leading-relaxed">1:1 coaching built around you, your goals, your life and your unique strengths.</p>
+              </div>
+            </div>
+
+            <!-- Feature: Support that lasts -->
+            <div class="flex gap-4 items-start">
+              <div class="shrink-0 w-12 h-12 rounded-full bg-brand-lteal flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2D6A6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-[17px] font-semibold text-brand-navy mb-1">Support that lasts</h3>
+                <p class="text-sm text-brand-mgray leading-relaxed">Ongoing encouragement and accountability to keep you moving forward.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ── COACHING SERVICES ── -->
+      <section id="coaching" class="bg-brand-cream px-6 lg:px-12 py-16 lg:py-20">
+
+        <!-- Section header row -->
+        <div class="lg:flex lg:items-end lg:justify-between mb-12">
+          <div>
+            <p class="text-xs font-semibold tracking-[0.22em] text-brand-teal uppercase mb-3">Coaching Services</p>
+            <h2 class="text-[30px] lg:text-[34px] font-bold text-brand-navy leading-tight mb-3">
+              1:1 coaching built around you.
+            </h2>
+            <p class="text-[15px] text-brand-mgray">Everything is tailored to your goals, experience and lifestyle.</p>
+          </div>
+          <a href="#enquiry"
+             class="hidden lg:inline-flex items-center gap-1.5 text-brand-teal text-sm font-semibold hover:underline shrink-0 ml-8 mb-1">
+            Learn more about coaching
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <!-- Cards -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Card 1 -->
+          <div class="bg-white rounded-[8px] p-8 shadow-[0_2px_8px_rgba(0,0,0,0.06)] flex flex-col">
+            <div class="mb-5">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#2D6A6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 8 L15 20 L15 30 L21 27 L21 20 L29 8 Z"/>
+              </svg>
+            </div>
+            <h3 class="text-[17px] font-semibold text-brand-navy mb-3">1:1 Coaching</h3>
+            <p class="text-sm text-brand-mgray leading-relaxed flex-1">
+              Individualised coaching with regular check-ins, feedback and guidance. Fully tailored to you.
+            </p>
+            <a href="#enquiry" class="mt-5 inline-flex items-center gap-1 text-brand-teal text-sm font-semibold hover:underline">
+              Learn more about coaching
+              <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white rounded-[8px] p-8 shadow-[0_2px_8px_rgba(0,0,0,0.06)] flex flex-col">
+            <div class="mb-5">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#2D6A6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="6" y="10" width="24" height="20" rx="2"/>
+                <path d="M6 17 L30 17"/>
+                <path d="M13 6 L13 12"/>
+                <path d="M23 6 L23 12"/>
+                <path d="M12 23 L16 23"/>
+                <path d="M20 23 L24 23"/>
+                <path d="M12 28 L16 28"/>
+                <path d="M20 28 L24 28"/>
+              </svg>
+            </div>
+            <h3 class="text-[17px] font-semibold text-brand-navy mb-3">Personalised Training Plans</h3>
+            <p class="text-sm text-brand-mgray leading-relaxed flex-1">
+              Purposeful training that fits your life and helps you build toward your goals with confidence.
+            </p>
+            <a href="#enquiry" class="mt-5 inline-flex items-center gap-1 text-brand-teal text-sm font-semibold hover:underline">
+              Learn more about coaching
+              <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="bg-white rounded-[8px] p-8 shadow-[0_2px_8px_rgba(0,0,0,0.06)] flex flex-col">
+            <div class="mb-5">
+              <svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#2D6A6A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 8 Q5 6 7 6 L29 6 Q31 6 31 8 L31 22 Q31 24 29 24 L19 24 L13 30 L13 24 L7 24 Q5 24 5 22 Z"/>
+              </svg>
+            </div>
+            <h3 class="text-[17px] font-semibold text-brand-navy mb-3">Ongoing Support</h3>
+            <p class="text-sm text-brand-mgray leading-relaxed flex-1">
+              I'm here for the big wins, the tough days and everything in between. You don't have to do it alone.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Mobile link -->
+        <div class="lg:hidden mt-8 text-center">
+          <a href="#enquiry" class="inline-flex items-center gap-1.5 text-brand-teal text-sm font-semibold hover:underline">
+            Learn more about coaching
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </section>
+
+
+      <!-- ── TESTIMONIALS ── -->
+      <section id="testimonials" class="bg-white px-6 lg:px-12 py-16 lg:py-20">
+
+        <div class="flex items-end justify-between mb-12">
+          <div>
+            <p class="text-xs font-semibold tracking-[0.22em] text-brand-teal uppercase mb-3">Kind Words</p>
+            <h2 class="text-[30px] lg:text-[34px] font-bold text-brand-navy leading-tight">
+              Runners I've worked<br class="hidden sm:block"> with have to say
+            </h2>
+          </div>
+          <a href="#" class="hidden lg:inline-flex items-center gap-1 text-brand-teal text-sm font-semibold hover:underline shrink-0 ml-4 mb-1">
+            Read more testimonials
+            <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Testimonial 1 -->
+          <div class="bg-brand-cream rounded-[8px] p-8 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+            <div class="text-[52px] font-serif text-brand-teal opacity-30 leading-none select-none mb-3">&ldquo;</div>
+            <p class="text-[15px] text-brand-dgray leading-relaxed mb-6 italic">
+              "Supportive, knowledgeable and genuinely invested in my progress. I'm stronger and more confident
+              than I ever thought possible."
+            </p>
+            <div>
+              <p class="text-sm font-semibold text-brand-navy">— Sarah</p>
+              <p class="text-xs text-brand-mgray tracking-widest uppercase mt-0.5">Trail Runner</p>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-brand-cream rounded-[8px] p-8 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+            <div class="text-[52px] font-serif text-brand-teal opacity-30 leading-none select-none mb-3">&ldquo;</div>
+            <p class="text-[15px] text-brand-dgray leading-relaxed mb-6 italic">
+              "Training is tailored to my life, not the other way around. I've seen huge improvements while
+              enjoying the process."
+            </p>
+            <div>
+              <p class="text-sm font-semibold text-brand-navy">— James</p>
+              <p class="text-xs text-brand-mgray tracking-widest uppercase mt-0.5">Ultra Runner</p>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-brand-cream rounded-[8px] p-8 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+            <div class="text-[52px] font-serif text-brand-teal opacity-30 leading-none select-none mb-3">&ldquo;</div>
+            <p class="text-[15px] text-brand-dgray leading-relaxed mb-6 italic">
+              "The encouragement and accountability have made all the difference. I finally feel like a real runner!"
+            </p>
+            <div>
+              <p class="text-sm font-semibold text-brand-navy">— Mel</p>
+              <p class="text-xs text-brand-mgray tracking-widest uppercase mt-0.5">Road Runner</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ── PROCESS / HOW IT WORKS ── -->
+      <section id="process" class="bg-brand-cream px-6 lg:px-12 py-16 lg:py-20">
+
+        <div class="text-center mb-14">
+          <p class="text-xs font-semibold tracking-[0.22em] text-brand-teal uppercase mb-3">How It Works</p>
+          <h2 class="text-[30px] lg:text-[34px] font-bold text-brand-navy">Simple steps to achieve your goals.</h2>
+        </div>
+
+        <div class="relative">
+          <!-- Dashed connector — desktop only -->
+          <div class="hidden lg:block absolute top-8 h-px"
+               style="left:calc(16.67% + 32px); right:calc(16.67% + 32px); border-top:2px dashed #2D6A6A; opacity:0.25;">
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-10 lg:gap-6">
+
+            <!-- Step 1 -->
+            <div class="flex lg:flex-col items-start lg:items-center gap-6 lg:gap-0 lg:text-center">
+              <div class="shrink-0 w-16 h-16 rounded-full bg-brand-teal text-white flex items-center justify-center text-2xl font-bold z-10 shadow-md lg:mb-6">1</div>
+              <div>
+                <h3 class="text-[18px] font-semibold text-brand-navy mb-2">Get in touch</h3>
+                <p class="text-sm text-brand-mgray leading-relaxed max-w-[220px] mx-auto">
+                  Reach out via the form and tell me a bit about you.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="flex lg:flex-col items-start lg:items-center gap-6 lg:gap-0 lg:text-center">
+              <div class="shrink-0 w-16 h-16 rounded-full bg-brand-teal text-white flex items-center justify-center text-2xl font-bold z-10 shadow-md lg:mb-6">2</div>
+              <div>
+                <h3 class="text-[18px] font-semibold text-brand-navy mb-2">Discuss your goals</h3>
+                <p class="text-sm text-brand-mgray leading-relaxed max-w-[220px] mx-auto">
+                  We'll chat about your running history, goals and what's possible.
+                </p>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="flex lg:flex-col items-start lg:items-center gap-6 lg:gap-0 lg:text-center">
+              <div class="shrink-0 w-16 h-16 rounded-full bg-brand-teal text-white flex items-center justify-center text-2xl font-bold z-10 shadow-md lg:mb-6">3</div>
+              <div>
+                <h3 class="text-[18px] font-semibold text-brand-navy mb-2">Start your journey</h3>
+                <p class="text-sm text-brand-mgray leading-relaxed max-w-[220px] mx-auto">
+                  We'll build your personalised plan and begin your coaching journey together.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+    <!-- end LEFT COLUMN -->
+
+
+    <!-- ============================================================
+         RIGHT COLUMN — sticky enquiry form (desktop only, lg:block)
+         ============================================================ -->
+    <aside class="hidden lg:block w-[340px] shrink-0">
+      <div
+        id="enquiry"
+        class="sticky top-16 bg-brand-navy text-white px-8 py-9 max-h-[calc(100vh-64px)] overflow-y-auto form-panel"
+        x-data="{
+          f: { name:'', email:'', phone:'', experience:'', goals:'', budget:'', referral:'' },
+          sent: false, busy: false, err: '',
+          async send() {
+            this.busy = true; this.err = '';
+            try {
+              const r = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify(this.f)
+              });
+              if (r.ok) { this.sent = true; }
+              else { this.err = 'Something went wrong. Please try again or email directly.'; }
+            } catch { this.err = 'Something went wrong. Please try again or email directly.'; }
+            this.busy = false;
+          }
+        }"
+      >
+
+        <!-- Success state -->
+        <div x-show="sent" x-cloak class="text-center py-10">
+          <div class="w-14 h-14 rounded-full bg-brand-teal flex items-center justify-center mx-auto mb-5">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 13 L10 19 L22 7"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold mb-2">Thanks!</h3>
+          <p class="text-sm text-white/65">I'll be in touch soon.</p>
+        </div>
+
+        <!-- Form content -->
+        <div x-show="!sent">
+          <h2 class="text-[19px] font-bold leading-snug mb-1">Ready to take the next step?</h2>
+          <p class="text-sm text-white/65 mb-6">Fill out the form below and I'll be in touch soon.</p>
+
+          <form @submit.prevent="send" class="flex flex-col gap-3" novalidate>
+
+            <input
+              type="text" x-model="f.name" placeholder="Name *"
+              required minlength="2" maxlength="80"
+              class="w-full bg-white/10 border border-white/25 text-white placeholder-white/40 rounded-[4px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors"
+            />
+
+            <input
+              type="email" x-model="f.email" placeholder="Email *"
+              required
+              class="w-full bg-white/10 border border-white/25 text-white placeholder-white/40 rounded-[4px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors"
+            />
+
+            <input
+              type="tel" x-model="f.phone" placeholder="Phone"
+              class="w-full bg-white/10 border border-white/25 text-white placeholder-white/40 rounded-[4px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors"
+            />
+
+            <div class="relative">
+              <select
+                x-model="f.experience" required
+                class="w-full bg-white/10 border border-white/25 rounded-[4px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors appearance-none pr-8"
+                :class="f.experience === '' ? 'text-white/40' : 'text-white'"
+              >
+                <option value="" disabled>Running experience *</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+                <option value="Ultra/Trail">Ultra / Trail</option>
+              </select>
+              <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <textarea
+              x-model="f.goals" placeholder="Goals (optional)"
+              rows="3" maxlength="500"
+              class="w-full bg-white/10 border border-white/25 text-white placeholder-white/40 rounded-[4px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors resize-none"
+            ></textarea>
+
+            <input
+              type="text" x-model="f.budget" placeholder="Budget (optional)"
+              maxlength="100"
+              class="w-full bg-white/10 border border-white/25 text-white placeholder-white/40 rounded-[4px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors"
+            />
+
+            <div class="relative">
+              <select
+                x-model="f.referral"
+                class="w-full bg-white/10 border border-white/25 text-white/60 rounded-[4px] px-3.5 py-2.5 text-sm focus:outline-none focus:border-brand-teal transition-colors appearance-none pr-8"
+                :class="f.referral === '' ? 'text-white/40' : 'text-white'"
+              >
+                <option value="">How did you hear about us?</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Google">Google</option>
+                <option value="Referral">Referral</option>
+                <option value="Other">Other</option>
+              </select>
+              <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <p x-show="err" x-text="err" x-cloak class="text-red-300 text-xs -mb-1"></p>
+
+            <button
+              type="submit" :disabled="busy"
+              class="w-full bg-brand-teal text-white text-[15px] font-semibold tracking-[0.02em] py-3.5 rounded-[6px] hover:bg-teal-500 transition-colors disabled:opacity-60 mt-1"
+            >
+              <span x-show="!busy">Apply for Coaching</span>
+              <span x-show="busy" x-cloak>Sending…</span>
+            </button>
+
+          </form>
+
+          <!-- Trust badge -->
+          <div class="flex items-center gap-2 mt-5 opacity-55">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
+              <rect x="2.5" y="6" width="9" height="6.5" rx="1"/>
+              <path d="M4.5 6 V4.5 A2.5 2.5 0 0 1 9.5 4.5 V6"/>
+            </svg>
+            <p class="text-[11px] text-white/55 leading-snug">No pressure, just a conversation. Your details are safe with me.</p>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+    <!-- end RIGHT COLUMN -->
+
+  </div>
+  <!-- end max-width flex wrapper -->
+
+
+  <!-- ================================================================
+       MOBILE ENQUIRY FORM — full-width section below Process (hidden on lg)
+       ================================================================ -->
+  <section
+    id="enquiry"
+    class="lg:hidden bg-brand-navy text-white px-6 py-14"
+    x-data="{
+      f: { name:'', email:'', phone:'', experience:'', goals:'', budget:'', referral:'' },
+      sent: false, busy: false, err: '',
+      async send() {
+        this.busy = true; this.err = '';
+        try {
+          const r = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+            method: 'POST',
+            headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify(this.f)
+          });
+          if (r.ok) { this.sent = true; }
+          else { this.err = 'Something went wrong. Please try again or email directly.'; }
+        } catch { this.err = 'Something went wrong. Please try again or email directly.'; }
+        this.busy = false;
+      }
+    }"
+  >
+    <div class="max-w-lg mx-auto">
+
+      <!-- Success -->
+      <div x-show="sent" x-cloak class="text-center py-12">
+        <div class="w-16 h-16 rounded-full bg-brand-teal flex items-center justify-center mx-auto mb-5">
+          <svg width="28" height="28" viewBox="0 0 26 26" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 13 L10 19 L22 7"/>
+          </svg>
+        </div>
+        <h3 class="text-2xl font-bold mb-2">Thanks!</h3>
+        <p class="text-white/65">I'll be in touch soon.</p>
+      </div>
+
+      <!-- Form -->
+      <div x-show="!sent">
+        <p class="text-xs font-semibold tracking-[0.22em] text-brand-teal uppercase mb-2">Get Started</p>
+        <h2 class="text-2xl font-bold mb-1">Ready to take the next step?</h2>
+        <p class="text-sm text-white/65 mb-8">Fill out the form below and I'll be in touch soon.</p>
+
+        <form @submit.prevent="send" class="flex flex-col gap-4" novalidate>
+
+          <input type="text"   x-model="f.name"  placeholder="Name *"  required minlength="2" maxlength="80"
+            class="w-full bg-white/10 border border-white/25 text-white placeholder-white/40 rounded-[4px] px-4 py-3 text-sm focus:outline-none focus:border-brand-teal"/>
+          <input type="email"  x-model="f.email" placeholder="Email *" required
+            class="w-full bg-white/10 border border-white/25 text-white placeholder-white/40 rounded-[4px] px-4 py-3 text-sm focus:outline-none focus:border-brand-teal"/>
+          <input type="tel"    x-model="f.phone" placeholder="Phone"
+            class="w-full bg-white/10 border border-white/25 text-white placeholder-white/40 rounded-[4px] px-4 py-3 text-sm focus:outline-none focus:border-brand-teal"/>
+
+          <div class="relative">
+            <select x-model="f.experience" required
+              class="w-full bg-white/10 border border-white/25 rounded-[4px] px-4 py-3 text-sm focus:outline-none focus:border-brand-teal appearance-none pr-8"
+              :class="f.experience === '' ? 'text-white/40' : 'text-white'">
+              <option value="" disabled>Running experience *</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+              <option value="Ultra/Trail">Ultra / Trail</option>
+            </select>
+            <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <textarea x-model="f.goals" placeholder="Goals (optional)" rows="3" maxlength="500"
+            class="w-full bg-white/10 border border-white/25 text-white placeholder-white/40 rounded-[4px] px-4 py-3 text-sm focus:outline-none focus:border-brand-teal resize-none"></textarea>
+          <input type="text" x-model="f.budget" placeholder="Budget (optional)" maxlength="100"
+            class="w-full bg-white/10 border border-white/25 text-white placeholder-white/40 rounded-[4px] px-4 py-3 text-sm focus:outline-none focus:border-brand-teal"/>
+
+          <div class="relative">
+            <select x-model="f.referral"
+              class="w-full bg-white/10 border border-white/25 rounded-[4px] px-4 py-3 text-sm focus:outline-none focus:border-brand-teal appearance-none pr-8"
+              :class="f.referral === '' ? 'text-white/40' : 'text-white'">
+              <option value="">How did you hear about us?</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Google">Google</option>
+              <option value="Referral">Referral</option>
+              <option value="Other">Other</option>
+            </select>
+            <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-white/50" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+
+          <p x-show="err" x-text="err" x-cloak class="text-red-300 text-sm -mb-1"></p>
+
+          <button type="submit" :disabled="busy"
+            class="w-full bg-brand-teal text-white text-[15px] font-semibold tracking-[0.02em] py-4 rounded-[6px] hover:bg-teal-600 transition-colors disabled:opacity-60">
+            <span x-show="!busy">Apply for Coaching</span>
+            <span x-show="busy" x-cloak>Sending…</span>
+          </button>
+
+        </form>
+
+        <div class="flex items-center gap-2 mt-5 opacity-55">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round">
+            <rect x="2.5" y="6" width="9" height="6.5" rx="1"/>
+            <path d="M4.5 6 V4.5 A2.5 2.5 0 0 1 9.5 4.5 V6"/>
+          </svg>
+          <p class="text-[11px] text-white/55 leading-snug">No pressure, just a conversation. Your details are safe with me.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+<!-- end pt-16 page body -->
+
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer class="bg-brand-navy text-white">
+  <div class="max-w-[1200px] mx-auto px-6 lg:px-12 py-7">
+    <div class="flex flex-col sm:flex-row items-center sm:justify-between gap-6">
+
+      <!-- Logo + wordmark -->
+      <a href="#" class="flex items-center gap-3 shrink-0">
+        <svg width="34" height="34" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs><clipPath id="footer-logo-clip"><circle cx="21" cy="21" r="19"/></clipPath></defs>
+          <circle cx="21" cy="21" r="19" fill="#2D6A6A" opacity="0.25" stroke="#2D6A6A" stroke-width="1.5"/>
+          <path d="M2,28 L9,17 L15,23 L22,11 L29,20 L35,14 L40,20 L40,40 L2,40 Z"
+                fill="#2D6A6A" opacity="0.5" clip-path="url(#footer-logo-clip)"/>
+          <path d="M2,32 L10,22 L17,28 L24,18 L31,26 L38,20 L40,24 L40,40 L2,40 Z"
+                fill="#D6EAEA" opacity="0.35" clip-path="url(#footer-logo-clip)"/>
+        </svg>
+        <div class="text-white/75">
+          <div class="text-[10px] font-bold tracking-[0.2em] leading-tight">SINGLETRACK</div>
+          <div class="text-[10px] font-bold tracking-[0.2em] leading-tight">COLLECTIVE</div>
+        </div>
+      </a>
+
+      <!-- Centre nav -->
+      <nav class="flex items-center gap-5 sm:gap-6">
+        <a href="#about"        class="text-xs text-white/55 hover:text-white transition-colors">About</a>
+        <a href="#coaching"     class="text-xs text-white/55 hover:text-white transition-colors">Coaching</a>
+        <a href="#testimonials" class="text-xs text-white/55 hover:text-white transition-colors">Testimonials</a>
+        <a href="#process"      class="text-xs text-white/55 hover:text-white transition-colors">Process</a>
+      </nav>
+
+      <!-- Social icons -->
+      <div class="flex items-center gap-4">
+        <a href="#" aria-label="Instagram" class="text-white/55 hover:text-white transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5"/>
+            <circle cx="12" cy="12" r="4.5"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <a href="mailto:hello@singletrackcollective.com" aria-label="Email" class="text-white/55 hover:text-white transition-colors">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"/>
+            <path d="M2 7 L12 14 L22 7"/>
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Copyright -->
+    <div class="mt-6 pt-5 border-t border-white/10 text-center">
+      <p class="text-[11px] text-white/35">© 2026 Singletrack Collective</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
