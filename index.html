@@ -107,6 +107,7 @@
       <a href="#coaching"     class="text-[13px] font-medium text-brand-dgray hover:text-brand-teal transition-colors">Coaching</a>
       <a href="#testimonials" class="text-[13px] font-medium text-brand-dgray hover:text-brand-teal transition-colors">Testimonials</a>
       <a href="#process"      class="text-[13px] font-medium text-brand-dgray hover:text-brand-teal transition-colors">Process</a>
+      <a href="#merch"        class="text-[13px] font-medium text-brand-dgray hover:text-brand-teal transition-colors">Merch</a>
       <a href="#enquiry"
          class="bg-brand-teal text-white text-[15px] font-semibold tracking-[0.02em] px-7 py-[11px] rounded-[6px] hover:bg-brand-navy transition-colors">
         Enquire
@@ -143,6 +144,7 @@
     <a href="#coaching"     class="text-2xl font-semibold text-white" @click="mobileOpen = false">Coaching</a>
     <a href="#testimonials" class="text-2xl font-semibold text-white" @click="mobileOpen = false">Testimonials</a>
     <a href="#process"      class="text-2xl font-semibold text-white" @click="mobileOpen = false">Process</a>
+    <a href="#merch"        class="text-2xl font-semibold text-white" @click="mobileOpen = false">Merch</a>
     <a href="#enquiry"
        class="mt-2 bg-brand-teal text-white text-lg font-semibold px-10 py-4 rounded-[6px] hover:bg-teal-600 transition-colors"
        @click="mobileOpen = false">Enquire</a>
@@ -441,6 +443,141 @@
           </div>
 
         </div>
+      </section>
+
+
+      <!-- ── MERCH ── -->
+      <section id="merch" class="bg-white px-6 lg:px-12 py-16 lg:py-20">
+
+        <!-- Section header -->
+        <div class="text-center mb-14">
+          <p class="text-xs font-semibold tracking-[0.22em] text-brand-teal uppercase mb-3">Merch</p>
+          <h2 class="text-[30px] lg:text-[34px] font-bold text-brand-navy leading-tight">Gear up. Run further.</h2>
+          <p class="mt-3 text-[15px] text-brand-mgray max-w-[420px] mx-auto">
+            Rep the collective. All items ship within 5 working days. Size is collected at checkout.
+          </p>
+        </div>
+
+        <!-- Product grid -->
+        <!-- =====================================================================
+             STRIPE SETUP INSTRUCTIONS
+             1. Create a free account at stripe.com
+             2. Go to Products → Add product for each item (set name, price, image)
+             3. Go to Payment Links → Create link for each product
+             4. In the payment link settings: enable "Collect shipping address"
+             5. Optionally add a custom field (Type: Dropdown) for Size (XS/S/M/L/XL/XXL)
+             6. Replace each href="https://buy.stripe.com/YOUR_LINK_…" below with the
+                real Payment Link URL copied from your Stripe dashboard
+             ===================================================================== -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[900px] mx-auto">
+
+          <!-- Product 1: Classic Tee -->
+          <div class="bg-brand-cream rounded-[8px] overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] flex flex-col">
+            <div class="bg-brand-lteal flex items-center justify-center py-10">
+              <svg width="120" height="110" viewBox="0 0 140 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- T-shirt silhouette -->
+                <path d="M55,28 Q70,42 85,28 L114,50 L95,62 L95,98 L45,98 L45,62 L26,50 Z"
+                      fill="#2D6A6A" fill-opacity="0.18" stroke="#2D6A6A" stroke-width="2.5" stroke-linejoin="round"/>
+                <!-- Collar -->
+                <path d="M55,28 Q70,44 85,28" fill="none" stroke="#2D6A6A" stroke-width="2" stroke-linecap="round"/>
+                <!-- Mountain motif on chest -->
+                <path d="M57,74 L63,62 L70,70 L77,55 L84,68 L90,74 Z"
+                      fill="#2D6A6A" fill-opacity="0.35"/>
+              </svg>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-[17px] font-semibold text-brand-navy mb-1">Classic Tee</h3>
+              <p class="text-brand-orange font-bold text-lg mb-3">$35</p>
+              <p class="text-sm text-brand-mgray leading-relaxed mb-5 flex-1">
+                Lightweight, breathable cotton-blend tee with the Singletrack mountain logo. Unisex fit, sizes XS–XXL.
+              </p>
+              <!-- Replace href with your Stripe Payment Link for this product -->
+              <a href="https://buy.stripe.com/YOUR_LINK_TEE"
+                 target="_blank" rel="noopener noreferrer"
+                 class="block text-center bg-brand-teal text-white text-[15px] font-semibold tracking-[0.02em] px-6 py-3 rounded-[6px] hover:bg-brand-navy transition-colors">
+                Buy Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Product 2: Running Cap -->
+          <div class="bg-brand-cream rounded-[8px] overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] flex flex-col">
+            <div class="bg-brand-lteal flex items-center justify-center py-10">
+              <svg width="120" height="110" viewBox="0 0 140 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Cap dome -->
+                <path d="M22,74 Q22,34 70,34 Q118,34 118,74 Z"
+                      fill="#2D6A6A" fill-opacity="0.18" stroke="#2D6A6A" stroke-width="2.5"/>
+                <!-- Sweatband line -->
+                <line x1="22" y1="74" x2="118" y2="74" stroke="#2D6A6A" stroke-width="1.5"/>
+                <!-- Brim -->
+                <path d="M12,74 Q70,74 118,74 Q124,83 106,89 Q70,96 18,85 Z"
+                      fill="#2D6A6A" fill-opacity="0.12" stroke="#2D6A6A" stroke-width="2" stroke-linejoin="round"/>
+                <!-- Button on top -->
+                <circle cx="70" cy="35" r="4" fill="#2D6A6A" fill-opacity="0.4"/>
+                <!-- Vent dots -->
+                <circle cx="48" cy="60" r="2.5" fill="#2D6A6A" fill-opacity="0.28"/>
+                <circle cx="92" cy="60" r="2.5" fill="#2D6A6A" fill-opacity="0.28"/>
+              </svg>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-[17px] font-semibold text-brand-navy mb-1">Running Cap</h3>
+              <p class="text-brand-orange font-bold text-lg mb-3">$28</p>
+              <p class="text-sm text-brand-mgray leading-relaxed mb-5 flex-1">
+                Lightweight, moisture-wicking technical cap. Adjustable strap. One size fits most.
+              </p>
+              <!-- Replace href with your Stripe Payment Link for this product -->
+              <a href="https://buy.stripe.com/YOUR_LINK_CAP"
+                 target="_blank" rel="noopener noreferrer"
+                 class="block text-center bg-brand-teal text-white text-[15px] font-semibold tracking-[0.02em] px-6 py-3 rounded-[6px] hover:bg-brand-navy transition-colors">
+                Buy Now
+              </a>
+            </div>
+          </div>
+
+          <!-- Product 3: Training Hoodie -->
+          <div class="bg-brand-cream rounded-[8px] overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.06)] flex flex-col">
+            <div class="bg-brand-lteal flex items-center justify-center py-10">
+              <svg width="120" height="110" viewBox="0 0 140 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Hoodie body -->
+                <path d="M52,42 Q70,54 88,42 L118,62 L98,74 L98,112 L42,112 L42,74 L22,62 Z"
+                      fill="#2D6A6A" fill-opacity="0.18" stroke="#2D6A6A" stroke-width="2.5" stroke-linejoin="round"/>
+                <!-- Hood -->
+                <path d="M52,42 Q56,18 70,14 Q84,18 88,42 Q80,50 70,50 Q60,50 52,42 Z"
+                      fill="#2D6A6A" fill-opacity="0.22" stroke="#2D6A6A" stroke-width="2" stroke-linejoin="round"/>
+                <!-- Drawstrings -->
+                <line x1="70" y1="50" x2="64" y2="66" stroke="#2D6A6A" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="3 2"/>
+                <line x1="70" y1="50" x2="76" y2="66" stroke="#2D6A6A" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="3 2"/>
+                <!-- Kangaroo pocket -->
+                <path d="M54,85 Q70,81 86,85 L86,106 L54,106 Z"
+                      fill="#2D6A6A" fill-opacity="0.12" stroke="#2D6A6A" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="text-[17px] font-semibold text-brand-navy mb-1">Training Hoodie</h3>
+              <p class="text-brand-orange font-bold text-lg mb-3">$65</p>
+              <p class="text-sm text-brand-mgray leading-relaxed mb-5 flex-1">
+                Warm mid-layer for post-run recovery and colder training days. Kangaroo pocket. Sizes XS–XXL.
+              </p>
+              <!-- Replace href with your Stripe Payment Link for this product -->
+              <a href="https://buy.stripe.com/YOUR_LINK_HOODIE"
+                 target="_blank" rel="noopener noreferrer"
+                 class="block text-center bg-brand-teal text-white text-[15px] font-semibold tracking-[0.02em] px-6 py-3 rounded-[6px] hover:bg-brand-navy transition-colors">
+                Buy Now
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Stripe trust badge -->
+        <div class="flex items-center justify-center gap-2 mt-10 opacity-50">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#6B7B7B" stroke-width="1.5" stroke-linecap="round">
+            <rect x="2.5" y="6" width="9" height="6.5" rx="1"/>
+            <path d="M4.5 6 V4.5 A2.5 2.5 0 0 1 9.5 4.5 V6"/>
+          </svg>
+          <p class="text-[12px] text-brand-mgray">Secure checkout powered by Stripe</p>
+        </div>
+
       </section>
 
 
@@ -772,6 +909,7 @@
         <a href="#coaching"     class="text-xs text-white/55 hover:text-white transition-colors">Coaching</a>
         <a href="#testimonials" class="text-xs text-white/55 hover:text-white transition-colors">Testimonials</a>
         <a href="#process"      class="text-xs text-white/55 hover:text-white transition-colors">Process</a>
+        <a href="#merch"        class="text-xs text-white/55 hover:text-white transition-colors">Merch</a>
       </nav>
 
       <!-- Social icons -->
